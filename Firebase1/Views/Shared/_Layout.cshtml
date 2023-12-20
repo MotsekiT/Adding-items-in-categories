@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - CRUD Operations with Firebase DataStore</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav btn-group-vertical text-center">
+                        <li>@Html.ActionLink("Category Items with Firebase", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Create", "Contact")</li>
+
+                        @if (@HttpContext.Current.Session["AccessRight"] != null)
+                        {
+                            if (@HttpContext.Current.Session["AccessRight"].ToString() == "Admin")
+                            {
+                                @*<li>@Html.ActionLink("Messages", "Index", "Contact")</li>
+                                <li>@Html.ActionLink("Category", "Index", "Category")</li>
+                                <li>@Html.ActionLink("Items", "Index", "Items")</li>
+                                <li>@Html.ActionLink("Upsert", "Upsert", "Items")</li>*@
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Manage Content
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <div class="dropdown-item">@Html.ActionLink("Messages", "Index", "Contact")</div>
+                                        <div class="dropdown-divider"></div>
+                                        <div class="dropdown-item">@Html.ActionLink("Category", "Index", "Category")</div>
+                                        <div class="dropdown-divider"></div>
+                                        <div class="dropdown-item">@Html.ActionLink("Items", "Index", "Items")</div>
+                                    </div>
+                                </li>
+                            }
+                        }
+
+                        @if (@HttpContext.Current.Session["Email"] == null)
+                        {
+                            <li>@Html.ActionLink("SignUp", "SignUp", "Account")</li>
+                            <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                        }
+                        else
+                        if (@HttpContext.Current.Session["Email"] != null)
+                        {
+                            <li>@Html.ActionLink(@HttpContext.Current.Session["Email"].ToString() + " Log Out", "LogOff", "Account")</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="container body-content">
+        <br />
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - CRUD Operations with Firebase DataStore</p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

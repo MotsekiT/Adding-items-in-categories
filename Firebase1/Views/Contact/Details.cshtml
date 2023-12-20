@@ -1,0 +1,70 @@
+﻿@model Firebase1.Models.Contact
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+@*summernote*@
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(modelItem => modelItem.Message, htmlAttributes: new { @class = "form-control summernote" })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResponseMessage)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(modelItem => modelItem.ResponseMessage, htmlAttributes: new { @class = "form-control summernote" })
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ContactId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@section Scripts {
+
+    @*summernote*@
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.summernote').summernote({
+                height: 250
+            });
+        });
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Firebase1.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Category List</h2>
+
+<p>
+    @Html.ActionLink("Add new Category", "Create")
+</p>
+<table class="table">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryImagePath)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+
+    <th>
+        @Html.DisplayFor(modelItem => item.CategoryCode)
+    </th>
+    <td>
+        @Html.DisplayFor(modelItem => item.CategoryName)
+    </td>
+    <td>
+        <img src="@item.CategoryImagePath" width="100" style="border-radius:5px; border:1px solid #bbb " />
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.CategoryCode }) |
+        @Html.ActionLink("Details", "Details", new { id = item.CategoryCode }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.CategoryCode })
+    </td>
+</tr>
+}
+
+</table>

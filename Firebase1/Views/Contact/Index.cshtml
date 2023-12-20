@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Firebase1.Models.Contact>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Contact Mails</h2>
+
+@*summernote*@
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResponseMessage)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.TextAreaFor(modelItem => item.Message, htmlAttributes: new { @class = "form-control summernote" })
+            </td>
+            <td>
+                @Html.TextAreaFor(modelItem => item.ResponseMessage, htmlAttributes: new { @class = "form-control summernote" })
+            </td>
+            <td>
+       
+                @Html.ActionLink("Respond", "Edit", new { id = item.ContactId }) |
+
+                @Html.ActionLink("Details", "Details", new { id = item.ContactId }) |
+    
+                @Html.ActionLink("Delete", "Delete", new { id = item.ContactId })
+
+            </td>
+        </tr>
+    }
+</table>
+
+@section Scripts {
+
+    @*summernote*@
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.summernote').summernote({
+                height: 250
+            });
+        });
+    </script>
+}
